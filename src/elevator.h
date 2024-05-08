@@ -1,6 +1,7 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
+#include <QLCDNumber>
 #include <QWidget>
 #include <QPushButton>
 #include <QSlider>
@@ -74,6 +75,7 @@ private:
     QLabel          *elevator_status; // show status
     QPushButton     *btn_open_door; // btn for door open
     QPushButton     *btn_close_door; // btn for door close
+    QLCDNumber      *plabel;
 private:
     void init_elevator();
     // init slider position , sheetstyle ,size ,signal or someting

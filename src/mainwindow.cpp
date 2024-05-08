@@ -6,7 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    this->setFixedSize(1000,700);
+    this->setFixedSize(1000,800);
     ui->setupUi(this);
     init_outerbtn();
     init_elevator();

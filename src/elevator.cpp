@@ -69,7 +69,7 @@ void Elevator::startMoving() {
     }
     else{
         QTimer *moveTimer = new QTimer(this);
-        connect(moveTimer, &QTimer::timeout, this, [=]() {
+        connect(moveTimer, &QTimer::timeout, this, [=]()mutable {
             if(status == 0){
                 moveTimer->stop();
                 moveTimer->deleteLater();
@@ -96,8 +96,9 @@ void Elevator::startMoving() {
 
 void Elevator::update_position_label(int value)
 {
-    QString text = QString("电梯位于: %1L").arg(value);
-    positionlabel->setText(text);
+    //QString text = QString("电梯位于: %1L").arg(value);
+    //positionlabel->setText(text);
+    plabel->display(value);
 }
 
 bool Elevator::isRunning()
@@ -122,7 +123,7 @@ void Elevator::openDoor()
 
 void Elevator::closeDoor()
 {
-     emit door_status_changed(0);
+    emit door_status_changed(0);
 }
 
 
@@ -176,12 +177,12 @@ void Elevator::init_btn_door()
 {
     btn_open_door = new QPushButton(this);
     btn_open_door->setFixedSize(50,25);
-    btn_open_door->move(50,600);
+    btn_open_door->move(50,650);
     btn_open_door->setText("开门");
     connect(btn_open_door,&QPushButton::clicked,this,&Elevator::btn_openDoor);
     btn_close_door = new QPushButton(this);
     btn_close_door->setFixedSize(50,25);
-    btn_close_door->move(100,600);
+    btn_close_door->move(100,650);
     btn_close_door->setText("关门");
     connect(btn_close_door,&QPushButton::clicked,this,&Elevator::btn_closeDoor);
 }
@@ -193,19 +194,19 @@ void Elevator::init_elevator()
     elevator->setRange(1,20);
     elevator->setValue(1);
     elevator->setStyleSheet("QSlider::groove:vertical {"
-                          "border: 1px solid #999999;"
-                          "background: white;"
-                          "margin: 0px 0px;"
-                          "}"
-                          "QSlider::handle:vertical {"
-                          "background: blue;"
-                          "border: 1px solid blue;"
-                          "width: 20px;"
-                          "height: 20px;"
-                          "margin: -2px 0px;"
-                          "border-radius: 5px;"
-                          "}");
-    elevator->move(25,25);
+                            "border: 1px solid #999999;"
+                            "background: white;"
+                            "margin: 0px 0px;"
+                            "}"
+                            "QSlider::handle:vertical {"
+                            "background: blue;"
+                            "border: 1px solid blue;"
+                            "width: 20px;"
+                            "height: 20px;"
+                            "margin: -2px 0px;"
+                            "border-radius: 5px;"
+                            "}");
+    elevator->move(25,75);
     connect(elevator, &QSlider::valueChanged, this, &Elevator::update_position_label);
 }
 
@@ -254,17 +255,24 @@ void Elevator::startMoving_2(int dstfloor)
 
 void Elevator::init_positionlabel()
 {
-    positionlabel = new QLabel(this);
-    positionlabel->setText("电梯位于: 1L");
-    positionlabel->move(50,550);
-    positionlabel->setFixedSize(100,50);
+    plabel = new QLCDNumber(this);
+    plabel->setStyleSheet("QLCDNumber {"
+                          "background-color: black;"
+                          "color: red;"
+                          "border: 2px solid gray;"
+                          "border-radius: 5px;"
+                          "}");
+    plabel->setMode(QLCDNumber::Dec);
+    plabel->move(60,0);
+    plabel->setFixedSize(80,50);
+    plabel->display(1);
 }
 
 void Elevator::init_doorlabel()
 {
     doorlabel = new QLabel(this);
     doorlabel->setText("关门");
-    doorlabel->move(50,525);
+    doorlabel->move(50,575);
     doorlabel->setFixedSize(100,50);
 }
 
@@ -272,7 +280,7 @@ void Elevator::init_embtn()
 {
     embtn = new QPushButton(this);
     embtn->setText("报警");
-    embtn->move(50,625);
+    embtn->move(50,675);
     embtn->setFixedSize(100,50);
     connect(embtn,&QPushButton::clicked,this,&Elevator::emStop);
 }
@@ -284,7 +292,7 @@ void Elevator::init_innerbtn()
             int num = col*10+row;
             innerbtn[num] = new QPushButton(QString("%1").arg(num + 1),this);
             innerbtn[num]->setFixedSize(50,50);
-            innerbtn[num]->move(col*50+55,row*50+25);
+            innerbtn[num]->move(col*50+55,row*50+75);
             innerbtn[num]->setStyleSheet("QPushButton {"
                                          "background-color: white;"
                                          "}"
@@ -304,7 +312,7 @@ void Elevator::init_elevator_statuslabel()
 {
     elevator_status = new QLabel(this);
     elevator_status->setText("空闲");
-    elevator_status->move(100,525);
+    elevator_status->move(100,575);
     elevator_status->setFixedSize(100,50);
 }
 

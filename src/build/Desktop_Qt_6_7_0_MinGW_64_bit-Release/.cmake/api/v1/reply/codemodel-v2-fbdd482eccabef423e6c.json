@@ -1,0 +1,79 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"hasInstallRule" : true,
+					"jsonFile" : "directory-.-Release-03544b66a6b54db3669e.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.16"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"name" : "Release",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "final",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "final::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-final-Release-6844ad9ef2f76abac066.json",
+					"name" : "final",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_autogen::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-final_autogen-Release-8259e492d8e85d1adf60.json",
+					"name" : "final_autogen",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "final_autogen_timestamp_deps::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-final_autogen_timestamp_deps-Release-0eb71198abca8c0668fa.json",
+					"name" : "final_autogen_timestamp_deps",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/43940/Desktop/final/build/Desktop_Qt_6_7_0_MinGW_64_bit-Release",
+		"source" : "C:/Users/43940/Desktop/final"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 6
+	}
+}
